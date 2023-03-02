@@ -1,5 +1,5 @@
 const express = require('express')
-const { teste, adicionarTarefa, removerTarefa } = require('../controllers/controller')
+const { teste, adicionarTarefa, removerTarefa, listarTarefas } = require('../controllers/controller')
 const router = express.Router()
 
 // Testar conexão
@@ -7,5 +7,5 @@ const router = express.Router()
 
 router.route('/add_task').post(adicionarTarefa)
 router.route('/del_task/:id').delete(removerTarefa)
-
+router.route('/list_tasks').get(listarTarefas)
 module.exports = router

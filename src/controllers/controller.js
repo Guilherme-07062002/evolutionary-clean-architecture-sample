@@ -60,5 +60,16 @@ module.exports = {
         } catch (error) {
             response.status(400).send(error)
         }
+    },
+    async listarTarefas(request, response) {
+        try {
+            const tarefas = await Task.findAll({})
+            if (!tarefas) {
+                response.status(400).json('Nenhuma tarefa foi cadastrada.');
+            }
+            response.status(200).json(tarefas);
+        } catch (error) {
+            response.status(400).send(error)
+        }
     }
 }
