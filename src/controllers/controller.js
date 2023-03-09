@@ -11,7 +11,8 @@ module.exports = {
     },
     async adicionarTarefa(request, response) {
         try {
-            const descricaoTarefa = request.body.descricao
+            const descricaoTarefa = request.body
+
             let idRegistro = 0
 
             if (!descricaoTarefa) {
@@ -27,10 +28,14 @@ module.exports = {
                 } else {
                     idRegistro = ultimoRegistro.id + 1
                 }
-                await Task.create({
-                    id: idRegistro,
-                    descricao: descricaoTarefa
-                })
+                descricaoTarefa.forEach(async tarefa => {
+                    Task.create({
+                        id: idRegistro,
+                        descricao: tarefa.descricao
+                    })
+                    idRegistro++
+                });
+
                 return response.status(200).json('Tarefa registrada.')
             }
         } catch (error) {
