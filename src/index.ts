@@ -1,14 +1,15 @@
-const express = require('express')
-const sequelize = require('./config/database')
+import express from "express"
+import { Sequelize } from "sequelize"
+
 const cors = require('cors')
-
 const Routes = require('./routers/indexRoutes.js')
-
 const app = express()
+const sequelize = new Sequelize("bd", "user", "12345", {
+    dialect: "sqlite",
+    host: "bd.sqlite"
+})
 
 app.use(cors())
-
-
 app.use(express.json())
 app.use('', Routes)
 
