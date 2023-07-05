@@ -11,7 +11,7 @@ namespace Request {
     }
 }
 
-export class CreateUserController implements Controller {
+export class CreateTaskController implements Controller {
     constructor(
         private readonly useCase: UseCase
     ) { }
