@@ -4,6 +4,7 @@ import { Sequelize } from "sequelize"
 const cors = require('cors')
 const Routes = require('./routers/indexRoutes.js')
 const app = express()
+
 const sequelize = new Sequelize("bd", "user", "12345", {
     dialect: "sqlite",
     host: "bd.sqlite"
