@@ -1,6 +1,7 @@
-import { Router } from "express"
-import taskRoutes from "../routes/task-routes"
+import express, { Application } from 'express';
+import taskRoutes from '../routes/task-routes';
 
-export default (router: Router): void => {
-    taskRoutes('/task', router)
-}   
+export default (app: Application): void => {
+    app.use(express.json());
+    app.use('/task', taskRoutes);
+};
