@@ -1,3 +1,3 @@
-export interface useCase<T = unknown, Z = unknown> {
+export interface UseCase<T = unknown, Z = unknown> {
     execute(data: T): Promise<Z>
 }
