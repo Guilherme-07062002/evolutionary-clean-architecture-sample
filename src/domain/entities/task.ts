@@ -6,4 +6,11 @@ export class Task {
         this.id = id
         this.description = description
     }
+
+    toJSON() {
+        return {
+            id: this.id,
+            description: this.description
+        }
+    }
 }

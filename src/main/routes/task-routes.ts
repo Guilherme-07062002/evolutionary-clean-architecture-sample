@@ -1,6 +1,6 @@
 import express, { Router } from 'express';
-import { adaptExpressRoute } from '../adapter/adapt-express-router';
-import { makeCreateTaskController } from '../factories/makeCreateTaskController';
+import { adaptExpressRoute } from '../adapter';
+import { makeCreateTaskController } from '../factories';
 
 const router: Router = express.Router();
 
