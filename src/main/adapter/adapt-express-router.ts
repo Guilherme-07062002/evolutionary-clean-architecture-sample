@@ -1,21 +1,25 @@
-import { Request, Response } from 'express';
-import { MakeController } from './../ports/make-controller';
+import { Env } from "@/index";
+import { Request, Response, NextFunction } from "express";
+import { MakeController } from "./../ports/make-controller";
 
 export const adaptExpressRoute = (makeController: MakeController) => {
-    return async (req: Request, res: Response) => {
-        const body = (req.method === 'POST' || req.method === 'PUT') && req.body;
-        const controller = makeController();
+    return async (req: Request, res: Response, next: NextFunction) => {
         try {
+            const env: Env = {
+                URL: "mongodb://localhost/bdTask",
+            };
+
+            const controller = makeController(env);
             const response = await controller.handle({
-                body,
+                body: req.body,
                 params: req.params,
                 query: req.query,
             });
 
             return res.status(response.status).json(response.body);
-        } catch (e: unknown) {
-            console.error(e);
-            return res.status(500).json({ message: 'Internal Server Error' });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: "Internal Server Error" });
         }
     };
 };
