@@ -1,6 +1,6 @@
 import { mock } from "vitest-mock-extended";
-import { TaskRepository } from "../../src/domain/repositories";
-import { ListTasksUseCase } from "../../src/application";
+import { TaskRepository } from "../../../src/domain/repositories";
+import { ListTasksUseCase } from "../../../src/application";
 import { describe, expect, test } from "vitest";
 
 const makeSut = () => {

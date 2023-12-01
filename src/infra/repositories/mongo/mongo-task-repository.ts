@@ -1,15 +1,19 @@
 import { EntityNotFoundError } from "../../../domain/errors";
-import { createTaskDTO, removeTaskDTO, updateTaskDTO } from "../../../domain/dtos";
+import {
+  createTaskDTO,
+  removeTaskDTO,
+  updateTaskDTO,
+} from "../../../domain/dtos";
 import { Task } from "../../../domain/entities";
 import { TaskRepository } from "../../../domain/repositories";
 import mongoose, { Model } from "mongoose";
 
-interface TaskDocument extends mongoose.Document {
+export interface TaskDocument extends mongoose.Document {
   id?: number;
   description: string;
 }
 
-const TaskSchema = new mongoose.Schema<TaskDocument>({
+export const TaskSchema = new mongoose.Schema<TaskDocument>({
   id: {
     type: Number,
   },
@@ -29,7 +33,7 @@ export class MongoTaskRepository implements TaskRepository {
 
   async create(data: createTaskDTO): Promise<Task | null> {
     const task = await this.taskModel.create(data);
-    if (!task) return null
+    if (!task) return null;
 
     return new Task(task.id, task.description);
   }

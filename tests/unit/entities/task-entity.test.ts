@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { Task } from "../../src/domain/entities/task";
+import { Task } from "../../../src/domain/entities/task";
 
 describe("test task entity", () => {
   test("should create a task", () => {

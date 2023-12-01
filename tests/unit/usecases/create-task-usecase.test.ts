@@ -1,8 +1,8 @@
 import { mock } from "vitest-mock-extended";
-import { CreateTaskUseCase } from "../../src/application";
-import { TaskRepository } from "../../src/domain/repositories";
+import { CreateTaskUseCase } from "../../../src/application";
+import { TaskRepository } from "../../../src/domain/repositories";
 import { describe, expect, test } from "vitest";
-import { Task } from "../../src/domain/entities/task";
+import { Task } from "../../../src/domain/entities/task";
 
 const makeSut = () => {
   const repo = mock<TaskRepository>();
