@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsnd src/index.ts"
+    "dev": "tsnd src/index.ts",
+    "coverage": "vitest --coverage"
   },
   "keywords": [],
   "author": "",
@@ -19,8 +20,15 @@
   "devDependencies": {
     "@types/express": "^4.17.17",
     "@types/mongoose": "^5.11.97",
+    "@types/node": "^20.10.1",
+    "@vitest/coverage-v8": "^0.32.2",
     "nodemon": "^2.0.21",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vitest": "^0.32.2",
+    "vitest-mock-extended": "^1.1.3"
+  },
+  "_moduleAliases": {
+    "@": "src"
   }
 }

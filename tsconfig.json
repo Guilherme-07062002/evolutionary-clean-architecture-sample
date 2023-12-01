@@ -1,16 +1,16 @@
 {
-	"compilerOptions": {
-	  "outDir": "dist",
-	  "module": "commonjs",
-	  "target": "es2019",
-	  "esModuleInterop": true,
-	  "sourceMap": true,
-	  "strict": true,
-	  "baseUrl": "./",
-	  "paths": {
-		"@/*": ["src/*"]
-	  }
-	},
-	"include": ["src/**/*"],
-	"exclude": ["node_modules"]
-  }
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "commonjs",
+    "target": "es2019",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "strict": true,
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
