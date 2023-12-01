@@ -14,6 +14,7 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "mongoose": "^7.6.3",
+    "morgan": "^1.10.0",
     "sequelize": "^6.29.0",
     "sqlite3": "^5.1.4",
     "supertest": "^6.3.3"
@@ -21,6 +22,7 @@
   "devDependencies": {
     "@types/express": "^4.17.17",
     "@types/mongoose": "^5.11.97",
+    "@types/morgan": "^1.9.9",
     "@types/node": "^20.10.1",
     "@types/supertest": "^2.0.16",
     "@vitest/coverage-v8": "^0.32.2",
