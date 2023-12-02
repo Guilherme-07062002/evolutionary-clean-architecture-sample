@@ -1,20 +1,18 @@
-import { describe, test, afterAll, expect } from "vitest";
+import { describe, test, expect, afterEach } from "vitest";
 import request from "supertest";
 import { app } from "../../../src";
 
 describe("testing create task route", () => {
-  let createdTaskId: number;
-
+  let createdTaskId: string;
   test("should return 201 if task created", async () => {
     const response = await request(app).post("/task").send({
-      description: "test_description",
+      description: "test",
     });
-    expect(response.status).toBe(201);
     createdTaskId = response.body.id;
+    expect(response.status).toBe(201);
   });
 
-  afterAll(async () => {
-    if (!createdTaskId) return;
-    await request(app).delete(`/task/${createdTaskId}`).expect(200);
+  afterEach(async () => {
+    await request(app).delete(`/task/${createdTaskId}`);
   });
 });

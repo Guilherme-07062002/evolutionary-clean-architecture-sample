@@ -3,6 +3,7 @@ import { TaskRepository } from "../../../src/domain/repositories";
 import { UpdateTaskUsecase } from "../../../src/application";
 import { describe, expect, test } from "vitest";
 import { EntityNotFoundError } from "../../../src/domain/errors";
+import { Task } from "../../../src/domain/entities";
 
 const makeSut = () => {
   const repo = mock<TaskRepository>();
@@ -13,7 +14,9 @@ const makeSut = () => {
 describe("test update task usecase", () => {
   test("should update a task", async () => {
     const { repo, usecase } = makeSut();
-    repo.update.mockResolvedValueOnce(true);
+    repo.update.mockResolvedValueOnce(
+      new Task({ id: "any_id", description: "any_description" })
+    );
     const response = await usecase.execute({
       id: 1,
       new_description: "any_description",

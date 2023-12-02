@@ -1,32 +1,36 @@
-import { updateTaskDTO } from "@/domain/dtos";
-import { Controller, Request, UseCase, Response } from "@/domain/ports";
+import { Controller, Request, Response } from "@/domain/ports";
 import { badRequest, notFound, ok } from "../adapters";
 import { EntityNotFoundError } from "../../domain/errors";
+import { UpdateTaskUsecase } from "@/application";
 
 namespace Request {
   export type Body = {
-    new_description: string
-  }
+    new_description: string;
+  };
   export type Params = {
-    id: number
-  }
+    id: string;
+  };
 }
 
 export class UpdateTaskController implements Controller {
-  constructor(
-    private readonly useCase: UseCase
-  ) { }
+  constructor(private readonly usecase: UpdateTaskUsecase) {}
 
-  async handle(request: Request<Request.Body, Request.Params>): Promise<Response> {
-    const body = request.body
-    const { id } = request.params
+  async handle(
+    request: Request<Request.Body, Request.Params>
+  ): Promise<Response> {
+    const body = request.body;
+    const { id } = request.params;
 
-    if (!body) return badRequest({ message: "missing body" })
-    if (!id) return badRequest({ message: "id is required" })
+    if (!body) return badRequest({ message: "missing body" });
+    if (!id) return badRequest({ message: "id is required" });
 
-    const response = await this.useCase.execute({ id, new_description: body.new_description } as updateTaskDTO)
-    if (response instanceof EntityNotFoundError) return notFound(response.message)
+    const response = await this.usecase.execute({
+      id,
+      new_description: body.new_description,
+    });
+    if (response instanceof EntityNotFoundError)
+      return notFound(response.message);
 
-    return ok(response)
+    return ok(response);
   }
 }

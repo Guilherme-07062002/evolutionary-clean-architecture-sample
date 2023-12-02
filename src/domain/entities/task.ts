@@ -1,16 +1,20 @@
+type TaskProps = {
+  id: string;
+  description: string;
+};
 export class Task {
-    public id: number;
-    public description: string;
+  public id: string;
+  public description: string;
 
-    constructor(id: number, description: string) {
-        this.id = id
-        this.description = description
-    }
+  constructor(data: TaskProps) {
+    this.id = data.id;
+    this.description = data.description;
+  }
 
-    toJSON() {
-        return {
-            id: this.id,
-            description: this.description
-        }
-    }
+  toJSON() {
+    return {
+      id: this.id,
+      description: this.description,
+    };
+  }
 }

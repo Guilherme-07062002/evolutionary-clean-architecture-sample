@@ -13,15 +13,17 @@ const makeSut = () => {
 describe("test create task usecase", () => {
   test("should create a task", async () => {
     const { repo, usecase } = makeSut();
-    repo.create.mockResolvedValueOnce(new Task(1, "any_description"));
-    const response = await usecase.execute({ description: "any_description" });
+    repo.create.mockResolvedValueOnce(
+      new Task({ id: "any_id", description: "any_description" })
+    );
+    const response = await usecase.execute("any_description");
     expect(response).toBeInstanceOf(Task);
   });
 
   test("should return null if error", async () => {
     const { repo, usecase } = makeSut();
     repo.create.mockResolvedValueOnce(null);
-    const response = await usecase.execute({ description: "any_description" });
+    const response = await usecase.execute("any_description");
     expect(response).toBeNull();
   });
 });

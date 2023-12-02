@@ -1,26 +1,25 @@
-import { removeTaskDTO } from "@/domain/dtos"
-import { Controller, Request, Response, UseCase } from "@/domain/ports"
-import { badRequest, notFound, ok } from '../adapters';
+import { Controller, Request, Response } from "@/domain/ports";
+import { badRequest, notFound, ok } from "../adapters";
 import { EntityNotFoundError } from "../../domain/errors";
+import { RemoveTaskUseCase } from "@/application";
 
 namespace Request {
   export type Params = {
-    id: number
-  }
+    id: string;
+  };
 }
 
 export class RemoveTaskController implements Controller {
-  constructor(
-    private readonly useCase: UseCase
-  ) { }
+  constructor(private readonly usecase: RemoveTaskUseCase) {}
 
   async handle(request: Request<unknown, Request.Params>): Promise<Response> {
-    const { id } = request.params
-    if (!id) return badRequest({ message: "id is required" })
+    const { id } = request.params;
+    if (!id) return badRequest({ message: "id is required" });
 
-    const response = await this.useCase.execute(request.params as removeTaskDTO)
-    if (response instanceof EntityNotFoundError) return notFound(response.message)
+    const response = await this.usecase.execute(request.params.id);
+    if (response instanceof EntityNotFoundError)
+      return notFound(response.message);
 
-    return ok(response)
+    return ok(response);
   }
 }

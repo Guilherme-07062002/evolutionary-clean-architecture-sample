@@ -1,10 +1,10 @@
-import { Task } from './../entities/task';
-import { createTaskDTO, removeTaskDTO, updateTaskDTO } from './../dtos/task-dtos';
-import { EntityNotFoundError } from '../errors';
+import { Task } from "./../entities/task";
+import { updateTaskDTO } from "./../dtos/task-dtos";
+import { EntityNotFoundError } from "../errors";
 
 export interface TaskRepository {
-    create(data: createTaskDTO): Promise<Task | null>
-    remove(data: removeTaskDTO): Promise<boolean | EntityNotFoundError>
-    update(data: updateTaskDTO): Promise<boolean | EntityNotFoundError>
-    list(): Promise<Task[]>
+  create(description: string): Promise<Task | null>;
+  remove(id: string): Promise<Task | EntityNotFoundError>;
+  update(data: updateTaskDTO): Promise<Task | EntityNotFoundError>;
+  list(): Promise<Task[]>;
 }

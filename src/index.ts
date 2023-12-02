@@ -6,6 +6,7 @@ export interface Env {
 }
 
 export const app = express();
+app.use(express.json());
 
 const router: Router = express.Router();
 

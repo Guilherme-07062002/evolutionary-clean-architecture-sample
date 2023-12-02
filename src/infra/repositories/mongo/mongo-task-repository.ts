@@ -1,9 +1,5 @@
 import { EntityNotFoundError } from "../../../domain/errors";
-import {
-  createTaskDTO,
-  removeTaskDTO,
-  updateTaskDTO,
-} from "../../../domain/dtos";
+import { updateTaskDTO } from "../../../domain/dtos";
 import { Task } from "../../../domain/entities";
 import { TaskRepository } from "../../../domain/repositories";
 import mongoose, { Model } from "mongoose";
@@ -15,7 +11,7 @@ export interface TaskDocument extends mongoose.Document {
 
 export const TaskSchema = new mongoose.Schema<TaskDocument>({
   id: {
-    type: Number,
+    type: String,
   },
   description: {
     type: String,
@@ -31,34 +27,36 @@ export class MongoTaskRepository implements TaskRepository {
     this.taskModel = mongoose.model<TaskDocument>("Task", TaskSchema);
   }
 
-  async create(data: createTaskDTO): Promise<Task | null> {
-    const task = await this.taskModel.create(data);
+  async create(description: string): Promise<Task | null> {
+    const task = await this.taskModel.create({ description });
     if (!task) return null;
 
-    return new Task(task.id, task.description);
+    return new Task({ id: task._id, description: task.description });
   }
 
-  async remove(data: removeTaskDTO): Promise<boolean | EntityNotFoundError> {
-    const result = await this.taskModel.deleteOne({ _id: data.id });
-    if (result.deletedCount == 0) return new EntityNotFoundError("Task");
+  async remove(id: string): Promise<Task | EntityNotFoundError> {
+    const task = await this.taskModel.findOne({ _id: id });
+    if (!task) return new EntityNotFoundError("Task");
 
-    return true;
+    await this.taskModel.deleteOne({ _id: id });
+    return new Task({ id: task._id, description: task.description });
   }
 
-  async update(data: updateTaskDTO): Promise<boolean | EntityNotFoundError> {
-    const result = await this.taskModel.updateOne(
+  async update(data: updateTaskDTO): Promise<Task | EntityNotFoundError> {
+    const task = await this.taskModel.findOne({ _id: data.id });
+    if (!task) return new EntityNotFoundError("Task");
+
+    await this.taskModel.updateOne(
       { _id: data.id },
       { description: data.new_description }
     );
-    if (result.modifiedCount == 0) return new EntityNotFoundError("Task");
-
-    return true;
+    return new Task({ id: task._id, description: data.new_description });
   }
 
   async list(): Promise<Task[]> {
     const result = await this.taskModel.find();
     const response = result.map(
-      (task: any) => new Task(task.id, task.description)
+      (task: any) => new Task({ id: task._id, description: task.description })
     );
 
     return response;

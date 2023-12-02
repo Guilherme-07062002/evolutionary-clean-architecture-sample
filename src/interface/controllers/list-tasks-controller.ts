@@ -1,12 +1,11 @@
-import { Controller, Request, Response, UseCase } from '@/domain/ports';
-import { ok } from '../adapters';
+import { Controller, Request, Response } from "@/domain/ports";
+import { ok } from "../adapters";
+import { ListTasksUseCase } from "@/application";
 export class ListTasksController implements Controller {
-  constructor(
-    private readonly useCase: UseCase
-  ) { }
+  constructor(private readonly usecase: ListTasksUseCase) {}
 
-  async handle(request: Request<unknown, unknown, unknown>): Promise<Response> {
-    const res = await this.useCase.execute({})
-    return ok(res)
+  async handle(): Promise<Response> {
+    const res = await this.usecase.execute();
+    return ok(res);
   }
 }
