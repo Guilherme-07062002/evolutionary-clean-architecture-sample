@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsnd src/index.ts",
-    "coverage:unit": "vitest tests/unit/**/*.test.ts --coverage",
-    "coverage:integration": "vitest tests/integration/**/*.test.ts"
+    "test:unit": "vitest tests/unit/**/*.test.ts",
+    "test:integration": "vitest tests/integration/**/*.test.ts",
+    "coverage:unit": "vitest tests/unit/**/*.test.ts --coverage"
   },
   "keywords": [],
   "author": "",
