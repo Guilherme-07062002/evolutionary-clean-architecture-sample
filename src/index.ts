@@ -4,13 +4,13 @@ import setupRoutes from "./main/config/setup-routes";
 export interface Env {
   URL: string;
 }
-
 export const app = express();
-app.use(express.json());
-
 const router: Router = express.Router();
 
-setupRoutes(app, router);
+app.use(express.json());
+app.use(router);
+
+setupRoutes(app);
 
 app.listen(3000, () => {
   console.log("Server running on port 3000.");

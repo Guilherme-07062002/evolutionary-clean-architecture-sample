@@ -1,5 +1,4 @@
-import express from "express";
-import { Application, Router } from "express";
+import { Router } from "express";
 import { adaptExpressRoute } from "../adapter";
 import {
   makeCreateTaskController,
@@ -8,10 +7,7 @@ import {
   makeListTasksController,
 } from "../factories";
 
-export default (prefix: string, router: Router, app: Application): void => {
-  app.use(express.json());
-  app.use(router);
-
+export default (prefix: string, router: Router): void => {
   router.get(`${prefix}`, adaptExpressRoute(makeListTasksController()));
   router.delete(`${prefix}/:id`, adaptExpressRoute(makeRemoveTaskController()));
   router.post(`${prefix}`, adaptExpressRoute(makeCreateTaskController()));
