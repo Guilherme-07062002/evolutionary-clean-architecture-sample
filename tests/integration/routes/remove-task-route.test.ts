@@ -1,19 +1,23 @@
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, beforeEach } from "vitest";
 import request from "supertest";
 import { app } from "../../../src";
 
+let createdTaskId: string;
+
 describe("testing remove task route", () => {
-  let createdTaskId: string;
-  test("should return 200 if task is removed", async () => {
-    const createdTask = await request(app).post("/task").send({
-      description: "test",
-    });
-    expect(createdTask.status).toBe(201);
-    if (createdTask.status !== 201) return;
+  beforeEach(async () => {
+    const createResponse = await request(app)
+      .post("/task")
+      .send({ description: "test" });
+    expect(createResponse.status).toBe(201);
 
-    createdTaskId = createdTask.body.id;
+    createdTaskId = createResponse.body.id;
+  });
 
-    const response = await request(app).delete(`/task/${createdTaskId}`);
-    expect(response.status).toBe(200);
+  test("should remove the created task", async () => {
+    if (!createdTaskId) return;
+
+    const deleteResponse = await request(app).delete(`/task/${createdTaskId}`);
+    expect(deleteResponse.status).toBe(200);
   });
 });
