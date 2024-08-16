@@ -1,6 +1,6 @@
 # Lista de tarefas
 
-Projeto exemplificando a construção de uma API RESTful que se baseia em uma lista de tarefas com Node.js, Express e MongoDB utilizando dos princípios da Clean Architecture.
+Projeto exemplificando a construção de uma API RESTful que se baseia em uma lista de tarefas com Node.js, utilizando princípios de Clean Architecture, Arquitetura Evolutiva e TDD, integrando a maleabilidade do Express com a modularidade do NestJS. 
 
 ## Execução
 
