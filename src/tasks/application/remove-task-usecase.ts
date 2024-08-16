@@ -1,7 +1,7 @@
-import { Task } from "@/tasks/domain/entities";
-import { EntityNotFoundError } from "@/tasks/domain/errors";
-import { UseCase } from "@/tasks/domain/ports";
-import { TaskRepository } from "@/tasks/domain/repositories";
+import { Task } from "../domain/entities";
+import { EntityNotFoundError } from "../domain/errors";
+import { UseCase } from "../domain/ports";
+import { TaskRepository } from "../domain/repositories";
 
 export class RemoveTaskUseCase
 implements UseCase<string, Task | EntityNotFoundError> {

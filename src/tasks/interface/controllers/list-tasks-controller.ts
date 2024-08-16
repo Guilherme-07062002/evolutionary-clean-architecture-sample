@@ -1,6 +1,9 @@
-import { Controller, Request, Response } from "@/tasks/domain/ports";
+
+import { Controller } from "@nestjs/common/interfaces";
+import { ListTasksUseCase } from "../../application";
+import { Response } from "../../domain/ports";
 import { ok } from "../adapters";
-import { ListTasksUseCase } from "@/tasks/application";
+
 export class ListTasksController implements Controller {
   constructor(private readonly usecase: ListTasksUseCase) { }
 

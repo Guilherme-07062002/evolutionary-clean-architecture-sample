@@ -1,6 +1,7 @@
-import { Task } from "@/tasks/domain/entities";
-import { UseCase } from "@/tasks/domain/ports";
-import { TaskRepository } from "@/tasks/domain/repositories";
+import { Task } from "../domain/entities";
+import { UseCase } from "../domain/ports";
+import { TaskRepository } from "../domain/repositories";
+
 
 export class ListTasksUseCase implements UseCase {
   constructor(private readonly taskRepository: TaskRepository) { }

@@ -1,6 +1,7 @@
-import { Env } from "@/index";
+
 import { Request, Response, NextFunction } from "express";
 import { MakeController } from "./../ports/make-controller";
+import { Env } from "../..";
 
 export const adaptExpressRoute = (makeController: MakeController) => {
   return async (req: Request, res: Response, next: NextFunction) => {

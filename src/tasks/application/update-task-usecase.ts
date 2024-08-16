@@ -1,8 +1,8 @@
-import { TaskRepository } from "@/tasks/domain/repositories";
-import { UpdateTaskDTO } from "@/tasks/domain/dtos";
-import { UseCase } from "@/tasks/domain/ports";
-import { EntityNotFoundError } from "@/tasks/domain/errors";
-import { Task } from "@/tasks/domain/entities";
+import { UpdateTaskDTO } from "../domain/dtos";
+import { Task } from "../domain/entities";
+import { EntityNotFoundError } from "../domain/errors";
+import { UseCase } from "../domain/ports";
+import { TaskRepository } from "../domain/repositories";
 
 export class UpdateTaskUsecase
 implements UseCase<UpdateTaskDTO, Task | EntityNotFoundError> {

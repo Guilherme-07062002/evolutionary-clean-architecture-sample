@@ -1,7 +1,8 @@
-import { Controller, Request, Response } from "@/tasks/domain/ports";
+import { Controller, Request, Response } from "../../domain/ports";
 import { badRequest, notFound, ok } from "../adapters";
 import { EntityNotFoundError } from "../../domain/errors";
-import { UpdateTaskUsecase } from "@/tasks/application";
+import { UpdateTaskUsecase } from "../../application";
+
 
 namespace Request {
   export type Body = {
@@ -26,7 +27,7 @@ export class UpdateTaskController implements Controller {
 
     const response = await this.usecase.execute({
       id,
-      new_description: body.new_description,
+      description: body.new_description,
     });
     if (response instanceof EntityNotFoundError)
       return notFound(response.message);

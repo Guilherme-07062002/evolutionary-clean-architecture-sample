@@ -1,7 +1,7 @@
 
-import { CreateTaskDTO, UpdateTaskDTO } from '@/tasks/domain/dtos';
-import { EntityNotFoundError } from '@/tasks/domain/errors';
+import { CreateTaskDTO, UpdateTaskDTO } from '../../../domain/dtos';
 import { Task } from '../../../domain/entities';
+import { EntityNotFoundError } from '../../../domain/errors';
 import { TaskRepository } from './../../../domain/repositories/task-repository';
 
 export class FakeTaskRepository implements TaskRepository {

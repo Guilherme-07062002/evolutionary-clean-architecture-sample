@@ -1,7 +1,8 @@
-import { Controller, Request, Response } from "@/tasks/domain/ports";
+
 import { badRequest, notFound, ok } from "../adapters";
 import { EntityNotFoundError } from "../../domain/errors";
-import { RemoveTaskUseCase } from "@/tasks/application";
+import { RemoveTaskUseCase } from "../../application";
+import { Controller, Request, Response } from "../../domain/ports";
 
 namespace Request {
   export type Params = {
