@@ -1,20 +1,20 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller';
-import { UsersService } from './users.service';
 
-describe('UsersController', () => {
-  let controller: UsersController;
+const makeSut = () => {
+  const service = {
+    create: jest.fn(),
+    findAll: jest.fn(),
+    findOne: jest.fn(),
+    update: jest.fn(),
+    remove: jest.fn()
+  }
+  const controller = new UsersController(service as any);
+  return { service, controller };
+}
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [UsersController],
-      providers: [UsersService],
-    }).compile();
-
-    controller = module.get<UsersController>(UsersController);
-  });
-
+describe('testing users controller', () => {
   it('should be defined', () => {
+    const { controller } = makeSut();
     expect(controller).toBeDefined();
   });
 });
