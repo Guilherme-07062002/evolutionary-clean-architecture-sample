@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
     "outDir": "dist",
     "module": "commonjs",
     "target": "es2019",
@@ -7,10 +12,12 @@
     "sourceMap": true,
     "strict": true,
     "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
 }
