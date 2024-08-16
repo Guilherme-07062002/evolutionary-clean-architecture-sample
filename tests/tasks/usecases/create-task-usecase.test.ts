@@ -9,7 +9,7 @@ const makeSut = () => {
   return { repo, usecase };
 };
 
-describe("test create task usecase", () => {
+describe("testing create task usecase", () => {
   test("should create a task", async () => {
     const { repo, usecase } = makeSut();
 

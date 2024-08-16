@@ -10,7 +10,7 @@ const makeSut = () => {
   return { repo, usecase };
 };
 
-describe("test update task usecase", () => {
+describe("testing update task usecase", () => {
   test("should update a task", async () => {
     const { repo, usecase } = makeSut();
     repo.update.mockResolvedValueOnce(

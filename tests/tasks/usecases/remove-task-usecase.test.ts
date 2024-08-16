@@ -11,7 +11,7 @@ const makeSut = () => {
   return { repo, usecase };
 };
 
-describe("test remove task usecase", () => {
+describe("testing remove task usecase", () => {
   test("should remove a task", async () => {
     const { repo, usecase } = makeSut();
     repo.remove.mockResolvedValueOnce(
