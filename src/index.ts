@@ -16,6 +16,6 @@ setupRoutes(app);
 // NestJS initialization
 bootstrap(app).then(() => {
   app.listen(3000, () => {
-    console.log("Server is running on http://localhost:3000");
+    console.log("\n\nServer is running on http://localhost:3000");
   });
 });

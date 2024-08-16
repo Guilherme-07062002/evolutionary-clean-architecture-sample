@@ -1,18 +1,18 @@
 
 import { CreateTaskDTO, UpdateTaskDTO } from '../../../domain/dtos';
 import { Task } from '../../../domain/entities';
-import { EntityNotFoundError } from '../../../domain/errors';
+import { ApplicationError, EntityNotFoundError } from '../../../domain/errors';
 import { TaskRepository } from './../../../domain/repositories/task-repository';
 
 export class FakeTaskRepository implements TaskRepository {
   remove(id: string): Promise<Task | EntityNotFoundError> {
-    throw new Error('Method not implemented.');
+    return new ApplicationError('This action removes a task') as any;
   }
   update(data: UpdateTaskDTO): Promise<Task | EntityNotFoundError> {
-    throw new Error('Method not implemented.');
+    return new ApplicationError('This action updates a task') as any;
   }
   list(): Promise<Task[]> {
-    throw new Error('Method not implemented.');
+    return new ApplicationError('This action returns all tasks') as any;
   }
 
   async create(data: CreateTaskDTO): Promise<Task> {
