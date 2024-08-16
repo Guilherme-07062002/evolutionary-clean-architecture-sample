@@ -1,9 +1,9 @@
 type TaskProps = {
-  id: string;
+  id: string | number;
   description: string;
 };
 export class Task {
-  public id: string;
+  public id: string | number;
   public description: string;
 
   constructor(data: TaskProps) {

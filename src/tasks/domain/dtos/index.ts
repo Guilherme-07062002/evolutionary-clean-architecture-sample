@@ -1,1 +1,1 @@
-export * from './task-dtos'
+export * from './task-dtos';

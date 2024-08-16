@@ -1,5 +1,5 @@
 import { EntityNotFoundError } from "../../../domain/errors";
-import { updateTaskDTO } from "../../../domain/dtos";
+import { CreateTaskDTO, UpdateTaskDTO } from "../../../domain/dtos";
 import { Task } from "../../../domain/entities";
 import { TaskRepository } from "../../../domain/repositories";
 import mongoose, { Model } from "mongoose";
@@ -27,8 +27,8 @@ export class MongoTaskRepository implements TaskRepository {
     this.taskModel = mongoose.model<TaskDocument>("Task", TaskSchema);
   }
 
-  async create(description: string): Promise<Task | null> {
-    const task = await this.taskModel.create({ description });
+  async create(data: CreateTaskDTO): Promise<Task | null> {
+    const task = await this.taskModel.create(data);
     if (!task) return null;
 
     return new Task({ id: task._id, description: task.description });
@@ -42,15 +42,18 @@ export class MongoTaskRepository implements TaskRepository {
     return new Task({ id: task._id, description: task.description });
   }
 
-  async update(data: updateTaskDTO): Promise<Task | EntityNotFoundError> {
+  async update(data: UpdateTaskDTO): Promise<Task | EntityNotFoundError> {
     const task = await this.taskModel.findOne({ _id: data.id });
     if (!task) return new EntityNotFoundError("Task");
 
     await this.taskModel.updateOne(
       { _id: data.id },
-      { description: data.new_description }
+      { description: data.description }
     );
-    return new Task({ id: task._id, description: data.new_description });
+    return new Task({
+      id: task._id,
+      description: task.description
+    });
   }
 
   async list(): Promise<Task[]> {

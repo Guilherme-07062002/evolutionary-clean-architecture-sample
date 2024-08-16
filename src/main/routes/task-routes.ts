@@ -5,7 +5,7 @@ import {
   makeRemoveTaskController,
   makeUpdateTaskController,
   makeListTasksController,
-} from "../factories";
+} from "../factories/tasks";
 
 export default (prefix: string, router: Router): void => {
   router.get(`${prefix}`, adaptExpressRoute(makeListTasksController()));

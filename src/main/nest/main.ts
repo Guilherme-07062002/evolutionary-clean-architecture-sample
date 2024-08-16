@@ -5,7 +5,7 @@ import { Express } from "express-serve-static-core";
 import { ExpressAdapter } from "@nestjs/platform-express";
 
 export async function bootstrap(expressApp: Express | NestApplicationOptions | undefined) {
-    const expressAdapter = new ExpressAdapter(expressApp);
-    const app = await NestFactory.create(AppModule, expressAdapter);
-    await app.init();
+  const expressAdapter = new ExpressAdapter(expressApp);
+  const app = await NestFactory.create(AppModule, expressAdapter);
+  await app.init();
 }

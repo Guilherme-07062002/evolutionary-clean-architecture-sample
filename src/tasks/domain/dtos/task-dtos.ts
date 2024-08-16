@@ -1,4 +1,7 @@
-export type updateTaskDTO = {
+export type TaskDTO = {
   id: string;
-  new_description: string;
+  description: string;
 };
+
+export type CreateTaskDTO = Omit<TaskDTO, "id">;
+export type UpdateTaskDTO = Partial<TaskDTO>;
