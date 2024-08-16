@@ -1,12 +1,11 @@
-import { mock } from "vitest-mock-extended";
-import { TaskRepository } from "../../../src/domain/repositories";
-import { UpdateTaskUsecase } from "../../../src/application";
-import { describe, expect, test } from "vitest";
-import { EntityNotFoundError } from "../../../src/domain/errors";
-import { Task } from "../../../src/domain/entities";
+import { UpdateTaskUsecase } from "../../../src/tasks/application";
+import { Task } from "../../../src/tasks/domain/entities/task";
+import { EntityNotFoundError } from "../../../src/tasks/domain/errors";
 
 const makeSut = () => {
-  const repo = mock<TaskRepository>();
+  const repo = {
+    update: jest.fn()
+  }
   const usecase = new UpdateTaskUsecase(repo);
   return { repo, usecase };
 };

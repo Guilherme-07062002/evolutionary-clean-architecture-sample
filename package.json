@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsnd src/index.ts",
-    "test:unit": "vitest tests/unit/**/*.test.ts",
-    "test:integration": "vitest tests/integration/**/*.test.ts",
-    "coverage:unit": "vitest tests/unit/**/*.test.ts --coverage"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -28,12 +26,16 @@
     "supertest": "^6.3.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-typescript": "^7.24.7",
     "@types/express": "^4.17.17",
+    "@types/jest": "^29.5.12",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.10.1",
     "@types/supertest": "^2.0.16",
-    "@vitest/coverage-v8": "^0.32.2",
+    "babel-jest": "^29.7.0",
     "jest": "^29.7.0",
     "nodemon": "^2.0.21",
     "ts-node-dev": "^2.0.0",

@@ -1,11 +1,11 @@
-import { mock } from "vitest-mock-extended";
-import { TaskRepository } from "../../../src/domain/repositories";
-import { ListTasksUseCase } from "../../../src/application";
-import { describe, expect, test } from "vitest";
+import { ListTasksUseCase } from "../../../src/tasks/application";
+
 
 const makeSut = () => {
-  const repo = mock<TaskRepository>();
-  const usecase = new ListTasksUseCase(repo);
+  const repo = {
+    list: jest.fn()
+  }
+  const usecase = new ListTasksUseCase(repo as any);
   return { repo, usecase };
 };
 
