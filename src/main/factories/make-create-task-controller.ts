@@ -1,7 +1,7 @@
-import { CreateTaskController } from "../../interface/controllers";
-import { CreateTaskUseCase } from "../../application";
+import { CreateTaskController } from "../../tasks/interface/controllers";
+import { CreateTaskUseCase } from "../../tasks/application";
 import { MakeController } from "../ports/make-controller";
-import { MongoTaskRepository } from "../../infra/repositories/mongo";
+import { MongoTaskRepository } from "../../tasks/infra/repositories/mongo";
 import { Env } from "../../index";
 
 export const makeCreateTaskController = (): MakeController => {

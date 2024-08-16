@@ -1,7 +1,7 @@
-import { MongoTaskRepository } from "../../infra/repositories/mongo/mongo-task-repository";
-import { ListTasksUseCase } from "../../application";
+import { MongoTaskRepository } from "../../tasks/infra/repositories/mongo/mongo-task-repository";
+import { ListTasksUseCase } from "../../tasks/application";
 import { Env } from "../../index";
-import { ListTasksController } from "../../interface/controllers";
+import { ListTasksController } from "../../tasks/interface/controllers";
 import { MakeController } from "../ports/make-controller";
 
 export const makeListTasksController = (): MakeController => {

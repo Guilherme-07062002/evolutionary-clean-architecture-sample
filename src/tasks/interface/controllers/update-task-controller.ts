@@ -1,7 +1,7 @@
-import { Controller, Request, Response } from "@/domain/ports";
+import { Controller, Request, Response } from "@/tasks/domain/ports";
 import { badRequest, notFound, ok } from "../adapters";
 import { EntityNotFoundError } from "../../domain/errors";
-import { UpdateTaskUsecase } from "@/application";
+import { UpdateTaskUsecase } from "@/tasks/application";
 
 namespace Request {
   export type Body = {
@@ -13,7 +13,7 @@ namespace Request {
 }
 
 export class UpdateTaskController implements Controller {
-  constructor(private readonly usecase: UpdateTaskUsecase) {}
+  constructor(private readonly usecase: UpdateTaskUsecase) { }
 
   async handle(
     request: Request<Request.Body, Request.Params>

@@ -1,5 +1,5 @@
-import { Task } from "./../entities/task";
-import { updateTaskDTO } from "./../dtos/task-dtos";
+import { Task } from "../entities/task";
+import { updateTaskDTO } from "../dtos/task-dtos";
 import { EntityNotFoundError } from "../errors";
 
 export interface TaskRepository {

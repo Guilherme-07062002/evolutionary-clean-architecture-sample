@@ -1,8 +1,8 @@
-import { RemoveTaskUseCase } from "../../application";
+import { RemoveTaskUseCase } from "../../tasks/application";
 import { Env } from "../../index";
-import { RemoveTaskController } from "../../interface/controllers";
+import { RemoveTaskController } from "../../tasks/interface/controllers";
 import { MakeController } from "../ports/make-controller";
-import { MongoTaskRepository } from "../../infra/repositories/mongo";
+import { MongoTaskRepository } from "../../tasks/infra/repositories/mongo";
 
 export const makeRemoveTaskController = (): MakeController => {
   return (env: Env) => {

@@ -1,7 +1,7 @@
-import { Controller, Request, Response } from "@/domain/ports";
+import { Controller, Request, Response } from "@/tasks/domain/ports";
 import { badRequest, notFound, ok } from "../adapters";
 import { EntityNotFoundError } from "../../domain/errors";
-import { RemoveTaskUseCase } from "@/application";
+import { RemoveTaskUseCase } from "@/tasks/application";
 
 namespace Request {
   export type Params = {
@@ -10,7 +10,7 @@ namespace Request {
 }
 
 export class RemoveTaskController implements Controller {
-  constructor(private readonly usecase: RemoveTaskUseCase) {}
+  constructor(private readonly usecase: RemoveTaskUseCase) { }
 
   async handle(request: Request<unknown, Request.Params>): Promise<Response> {
     const { id } = request.params;

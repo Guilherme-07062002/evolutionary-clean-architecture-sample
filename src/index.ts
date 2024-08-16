@@ -1,5 +1,6 @@
 import express, { Router } from "express";
 import setupRoutes from "./main/config/setup-routes";
+import { bootstrap } from "./main/nest/main";
 
 export interface Env {
   URL: string;
@@ -12,6 +13,9 @@ app.use(router);
 
 setupRoutes(app);
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000.");
+// NestJS initialization
+bootstrap(app).then(() => {
+  app.listen(3000, () => {
+    console.log("Server running on port 3000.");
+  });
 });
