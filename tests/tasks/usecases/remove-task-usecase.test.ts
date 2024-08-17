@@ -1,13 +1,13 @@
-import { RemoveTaskUseCase } from "../../../src/tasks/application";
-import { Task } from "../../../src/tasks/domain/entities/task";
-import { EntityNotFoundError } from "../../../src/tasks/domain/errors";
+import { RemoveTaskUseCase } from "../../../src/modules/tasks/application";
+import { Task } from "../../../src/modules/tasks/domain/entities/task";
+import { EntityNotFoundError } from "../../../src/modules/tasks/domain/errors";
 
 
 const makeSut = () => {
   const repo = {
     remove: jest.fn()
-  }
-  const usecase = new RemoveTaskUseCase(repo);
+  };
+  const usecase = new RemoveTaskUseCase(repo as any);
   return { repo, usecase };
 };
 

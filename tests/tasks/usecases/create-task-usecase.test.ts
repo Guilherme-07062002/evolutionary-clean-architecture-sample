@@ -1,5 +1,5 @@
-import { CreateTaskUseCase } from '../../../src/tasks/application'
-import { Task } from '../../../src/tasks/domain/entities/task';
+import { CreateTaskUseCase } from '../../../src/modules/tasks/application'
+import { Task } from '../../../src/modules/tasks/domain/entities/task';
 
 const makeSut = () => {
   const repo = {
@@ -17,7 +17,7 @@ describe("testing create task usecase", () => {
       new Task({ id: "any_id", description: "any_description" })
     );
 
-    const response = await usecase.execute("any_description");
+    const response = await usecase.execute({description: "any description"});
     expect(response).toBeInstanceOf(Task);
   });
 
@@ -25,7 +25,7 @@ describe("testing create task usecase", () => {
     const { repo, usecase } = makeSut();
     jest.spyOn(repo, "create").mockResolvedValueOnce(null);
 
-    const response = await usecase.execute("any_description");
+    const response = await usecase.execute({description: "any description"});
     expect(response).toBeNull();
   });
 });

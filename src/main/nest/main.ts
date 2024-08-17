@@ -1,5 +1,5 @@
 import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app.module";
+import { AppModule } from "../../app.module";
 import { NestApplicationOptions } from "@nestjs/common";
 import { Express } from "express-serve-static-core";
 import { ExpressAdapter } from "@nestjs/platform-express";

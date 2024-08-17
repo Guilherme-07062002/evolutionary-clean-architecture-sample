@@ -1,5 +1,5 @@
 export type TaskDTO = {
-  id: string;
+  id: string | number;
   description: string;
 };
 

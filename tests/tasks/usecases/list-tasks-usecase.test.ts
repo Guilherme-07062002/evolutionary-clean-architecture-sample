@@ -1,4 +1,4 @@
-import { ListTasksUseCase } from "../../../src/tasks/application";
+import { ListTasksUseCase } from "../../../src/modules/tasks/application";
 
 
 const makeSut = () => {
