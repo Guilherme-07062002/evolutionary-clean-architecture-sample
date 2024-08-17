@@ -1,6 +1,6 @@
-import { ListTasksUseCase } from "../../../tasks/application";
-import { FakeTaskRepository } from "../../../tasks/infra/repositories/fake";
-import { ListTasksController } from "../../../tasks/interface/controllers";
+import { ListTasksUseCase } from "../../../modules/tasks/application";
+import { FakeTaskRepository } from "../../../modules/tasks/infra/repositories/fake";
+import { ListTasksController } from "../../../modules/tasks/interface/controllers";
 import { MakeController } from "../../ports";
 
 

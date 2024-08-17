@@ -1,6 +1,6 @@
-import { UpdateTaskUsecase } from "../../../tasks/application";
-import { FakeTaskRepository } from "../../../tasks/infra/repositories/fake";
-import { UpdateTaskController } from "../../../tasks/interface/controllers";
+import { UpdateTaskUsecase } from "../../../modules/tasks/application";
+import { FakeTaskRepository } from "../../../modules/tasks/infra/repositories/fake";
+import { UpdateTaskController } from "../../../modules/tasks/interface/controllers";
 import { MakeController } from "../../ports";
 
 export const makeUpdateTaskController = (): MakeController => {
