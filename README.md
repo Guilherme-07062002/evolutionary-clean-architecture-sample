@@ -22,7 +22,8 @@ A Arquitetura Evolutiva é uma abordagem que prioriza a capacidade de um sistema
 * Facilidade de mudança: O sistema é construído para suportar mudanças, permitindo que novos requisitos sejam implementados sem grandes reescritas.
 * Testes contínuos: Automação de testes e integração contínua são fundamentais para garantir que as mudanças não introduzam regressões.
 * Feedback constante: O processo de desenvolvimento é iterativo e incremental, permitindo que o feedback dos usuários e do mercado seja incorporado rapidamente ao sistema.
-Decisões arquiteturais reversíveis: As decisões arquiteturais são tomadas de forma que possam ser alteradas ou ajustadas à medida que o sistema evolui.
+* Decisões arquiteturais reversíveis: As decisões arquiteturais são tomadas de forma que possam ser alteradas ou ajustadas à medida que o sistema evolui.
+
 A Arquitetura Evolutiva é especialmente útil em ambientes ágeis, onde a capacidade de responder rapidamente a mudanças é crucial para o sucesso do projeto.
 
 ## Execução
@@ -30,7 +31,7 @@ A Arquitetura Evolutiva é especialmente útil em ambientes ágeis, onde a capac
 1. Clone o repositório
 
 ```bash
-git clone https://github.com/Guilherme-07062002/clean-architecture-todo-list.git
+https://github.com/Guilherme-07062002/evolutionary-clean-architecture-sample
 ```
 
 2. Instale as dependências
