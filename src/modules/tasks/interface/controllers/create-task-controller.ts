@@ -1,7 +1,7 @@
-import { badRequest, created } from "../adapters";
+import { badRequest, created } from "../../../../main/helpers";
 import { CreateTaskUseCase } from "../../application";
 import { Request, Response } from "express";
-import { ApplicationError } from "../../domain/errors";
+import { ApplicationError } from "../../../../main/errors";
 
 export class CreateTaskController {
   constructor(private readonly usecase: CreateTaskUseCase) { }

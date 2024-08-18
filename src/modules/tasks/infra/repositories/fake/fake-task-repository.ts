@@ -1,6 +1,6 @@
 
 import { CreateTaskDTO, UpdateTaskDTO } from '../../../domain/dtos';
-import { ApplicationError } from '../../../domain/errors';
+import { ApplicationError } from '../../../../../main/errors';
 import { TaskRepository } from './../../../domain/repositories/task-repository';
 
 export class FakeTaskRepository implements TaskRepository {

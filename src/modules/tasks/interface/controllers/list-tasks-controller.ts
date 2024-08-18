@@ -1,7 +1,7 @@
 
 import { ListTasksUseCase } from "../../application";
-import { badRequest, ok } from "../adapters";
-import { ApplicationError } from "../../domain/errors";
+import { badRequest, ok } from "../../../../main/helpers";
+import { ApplicationError } from "../../../../main/errors";
 import { Request, Response } from "express";
 
 export class ListTasksController {

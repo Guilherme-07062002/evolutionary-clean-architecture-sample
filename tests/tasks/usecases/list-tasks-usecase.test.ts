@@ -4,7 +4,7 @@ import { ListTasksUseCase } from "../../../src/modules/tasks/application";
 const makeSut = () => {
   const repo = {
     list: jest.fn()
-  }
+  };
   const usecase = new ListTasksUseCase(repo as any);
   return { repo, usecase };
 };

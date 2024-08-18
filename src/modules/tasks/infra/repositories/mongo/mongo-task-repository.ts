@@ -1,4 +1,4 @@
-import { ApplicationError, EntityNotFoundError } from "../../../domain/errors";
+import { ApplicationError, EntityNotFoundError } from "../../../../../main/errors";
 import { CreateTaskDTO, TaskDTO, UpdateTaskDTO } from "../../../domain/dtos";
 import { TaskRepository } from "../../../domain/repositories";
 import mongoose, { Model } from "mongoose";

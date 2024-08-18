@@ -1,5 +1,5 @@
-import { badRequest, ok } from "../adapters";
-import { ApplicationError } from "../../domain/errors";
+import { badRequest, ok } from "../../../../main/helpers";
+import { ApplicationError } from "../../../../main/errors";
 import { UpdateTaskUsecase } from "../../application";
 import { Request, Response } from "express";
 

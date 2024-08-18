@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { ApplicationError } from "../../domain/errors";
+import { ApplicationError } from "../errors";
 
 export function ok<T>(res: Response, data: T): Response {
   return res.status(200).json({
