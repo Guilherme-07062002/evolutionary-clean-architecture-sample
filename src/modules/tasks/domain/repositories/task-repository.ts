@@ -1,8 +1,9 @@
-import { CreateTaskDTO, UpdateTaskDTO } from "../dtos";
+import { CreateTaskDTO, TaskDTO, UpdateTaskDTO } from "../dtos";
+import { ApplicationError } from "../errors";
 
 export interface TaskRepository {
-  create(data: CreateTaskDTO): Promise<unknown>;
-  remove(id: string): Promise<unknown>;
-  update(data: UpdateTaskDTO): Promise<unknown>;
-  list(): Promise<unknown>;
+  create(data: CreateTaskDTO): Promise<TaskDTO | ApplicationError>;
+  remove(id: string): Promise<TaskDTO | ApplicationError>;
+  update(data: UpdateTaskDTO): Promise<TaskDTO | ApplicationError>;
+  list(): Promise<TaskDTO[] | ApplicationError>;
 }

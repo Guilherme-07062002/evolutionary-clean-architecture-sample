@@ -1,6 +1,5 @@
-import { EntityNotFoundError } from "../../../domain/errors";
-import { CreateTaskDTO, UpdateTaskDTO } from "../../../domain/dtos";
-import { Task } from "../../../domain/entities";
+import { ApplicationError, EntityNotFoundError } from "../../../domain/errors";
+import { CreateTaskDTO, TaskDTO, UpdateTaskDTO } from "../../../domain/dtos";
 import { TaskRepository } from "../../../domain/repositories";
 import mongoose, { Model } from "mongoose";
 
@@ -27,22 +26,28 @@ export class MongoTaskRepository implements TaskRepository {
     this.taskModel = mongoose.model<TaskDocument>("Task", TaskSchema);
   }
 
-  async create(data: CreateTaskDTO): Promise<Task | null> {
+  async create(data: CreateTaskDTO): Promise<TaskDTO | ApplicationError> {
     const task = await this.taskModel.create(data);
-    if (!task) return null;
+    if (!task) return new ApplicationError("Error to create task");
 
-    return new Task({ id: task._id, description: task.description });
+    return { 
+      id: task._id, 
+      description: task.description
+    };
   }
 
-  async remove(id: string): Promise<Task | EntityNotFoundError> {
+  async remove(id: string): Promise<TaskDTO | EntityNotFoundError> {
     const task = await this.taskModel.findOne({ _id: id });
     if (!task) return new EntityNotFoundError("Task");
 
     await this.taskModel.deleteOne({ _id: id });
-    return new Task({ id: task._id, description: task.description });
+    return { 
+      id: task._id, 
+      description: task.description 
+    };
   }
 
-  async update(data: UpdateTaskDTO): Promise<Task | EntityNotFoundError> {
+  async update(data: UpdateTaskDTO): Promise<TaskDTO | EntityNotFoundError> {
     const task = await this.taskModel.findOne({ _id: data.id });
     if (!task) return new EntityNotFoundError("Task");
 
@@ -50,16 +55,21 @@ export class MongoTaskRepository implements TaskRepository {
       { _id: data.id },
       { description: data.description }
     );
-    return new Task({
+    return {
       id: task._id,
       description: task.description
-    });
+    };
   }
 
-  async list(): Promise<Task[]> {
+  async list(): Promise<TaskDTO[]> {
     const result = await this.taskModel.find();
     const response = result.map(
-      (task: any) => new Task({ id: task._id, description: task.description })
+      (task: any) => {
+        return {
+          id: task._id, 
+          description: task.description 
+        };
+      }
     );
 
     return response;
