@@ -9,10 +9,10 @@ export class RemoveTaskController {
 
   async handle(request: Request, response: Response): Promise<Response> {
     const params = request.params;
-    if (!params.id) return badRequest(response, new Error("id is required"));
+    if (!params.id) return badRequest(response, new ApplicationError("id is required"));
 
     const result = await this.usecase.execute(request.params.id);
-    if (result instanceof ApplicationError) return badRequest(response, new Error(result.message));
+    if (result instanceof ApplicationError) return badRequest(response, result);
 
     return ok(response, result);
   }

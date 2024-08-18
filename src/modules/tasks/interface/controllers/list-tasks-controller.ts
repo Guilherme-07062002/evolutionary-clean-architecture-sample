@@ -9,7 +9,7 @@ export class ListTasksController {
 
   async handle(request: Request, response: Response): Promise<Response> {
     const result = await this.usecase.execute();
-    if (result instanceof ApplicationError) return badRequest(response, new Error(result.message));
+    if (result instanceof ApplicationError) return badRequest(response, result);
     
     return ok(response, result);
   }

@@ -10,16 +10,16 @@ export class UpdateTaskController {
     const body = request.body;
     const params = request.params;
 
-    if (!body) return badRequest(response, new Error("missing body") );
+    if (!body) return badRequest(response, new ApplicationError("missing body") );
 
-    if (!params.id) return badRequest(response, new Error("id is required"));
+    if (!params.id) return badRequest(response, new ApplicationError("id is required"));
 
     const result = await this.usecase.execute({
       id: params.id,
       description: body.new_description,
     });
     
-    if (result instanceof ApplicationError) return badRequest(response, new Error(result.message));
+    if (result instanceof ApplicationError) return badRequest(response, result);
 
     return ok(response, result);
   }

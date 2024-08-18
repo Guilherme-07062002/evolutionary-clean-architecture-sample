@@ -7,7 +7,7 @@ export class CreateTaskController {
   constructor(private readonly usecase: CreateTaskUseCase) { }
   async handle(request: Request, response: Response): Promise<Response> {
     const body = request.body;
-    if (!body.description) return badRequest(response, new Error("Missing description"));
+    if (!body.description) return badRequest(response, new ApplicationError("Missing description"));
 
     const result = await this.usecase.execute(body);
 
