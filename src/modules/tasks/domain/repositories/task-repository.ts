@@ -1,5 +1,5 @@
 import { CreateTaskDTO, TaskDTO, UpdateTaskDTO } from "../dtos";
-import { ApplicationError } from "../errors";
+import { ApplicationError } from "../../../../main/errors";
 
 export interface TaskRepository {
   create(data: CreateTaskDTO): Promise<TaskDTO | ApplicationError>;
