@@ -1,7 +1,5 @@
+import { EntityNotFoundError } from "../../../src/main/errors";
 import { RemoveTaskUseCase } from "../../../src/modules/tasks/application";
-import { Task } from "../../../src/modules/tasks/domain/entities/task";
-import { EntityNotFoundError } from "../../../src/modules/tasks/domain/errors";
-
 
 const makeSut = () => {
   const repo = {
@@ -15,7 +13,7 @@ describe("testing remove task usecase", () => {
   test("should remove a task", async () => {
     const { repo, usecase } = makeSut();
     repo.remove.mockResolvedValueOnce(
-      new Task({ id: "any_id", description: "any_description" })
+      { id: "any_id", description: "any_description" }
     );
     const response = await usecase.execute("any_id");
     expect(response).toBeTruthy();

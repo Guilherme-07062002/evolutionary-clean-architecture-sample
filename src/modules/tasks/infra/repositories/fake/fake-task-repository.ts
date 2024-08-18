@@ -1,21 +1,20 @@
 
 import { CreateTaskDTO, UpdateTaskDTO } from '../../../domain/dtos';
-import { Task } from '../../../domain/entities';
-import { ApplicationError, EntityNotFoundError } from '../../../domain/errors';
+import { ApplicationError } from '../../../../../main/errors';
 import { TaskRepository } from './../../../domain/repositories/task-repository';
 
 export class FakeTaskRepository implements TaskRepository {
-  remove(id: string): Promise<Task | EntityNotFoundError> {
-    return new ApplicationError('This action removes a task') as any;
+  async remove(id: string) {
+    return new ApplicationError('This action removes a task');
   }
-  update(data: UpdateTaskDTO): Promise<Task | EntityNotFoundError> {
-    return new ApplicationError('This action updates a task') as any;
+  async update(data: UpdateTaskDTO) {
+    return new ApplicationError('This action updates a task');
   }
-  list(): Promise<Task[]> {
-    return new ApplicationError('This action returns all tasks') as any;
+  async list() {
+    return new ApplicationError('This action returns all tasks') ;
   }
 
-  async create(data: CreateTaskDTO): Promise<Task> {
-    return new Task({ id: 1, description: data.description });
+  async create(data: CreateTaskDTO) {
+    return new ApplicationError('This action creates a task');
   }
 }

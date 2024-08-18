@@ -1,6 +1,5 @@
+import { EntityNotFoundError } from "../../../src/main/errors";
 import { UpdateTaskUsecase } from "../../../src/modules/tasks/application";
-import { Task } from "../../../src/modules/tasks/domain/entities/task";
-import { EntityNotFoundError } from "../../../src/modules/tasks/domain/errors";
 
 const makeSut = () => {
   const repo = {
@@ -14,7 +13,7 @@ describe("testing update task usecase", () => {
   test("should update a task", async () => {
     const { repo, usecase } = makeSut();
     repo.update.mockResolvedValueOnce(
-      new Task({ id: "any_id", description: "any_description" })
+      { id: "any_id", description: "any_description" }
     );
     const response = await usecase.execute({
       id: 1,

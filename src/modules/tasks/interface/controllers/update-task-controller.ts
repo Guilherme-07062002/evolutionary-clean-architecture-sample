@@ -1,37 +1,28 @@
-import { Controller, Request, Response } from "../../domain/ports";
-import { badRequest, notFound, ok } from "../adapters";
-import { EntityNotFoundError } from "../../domain/errors";
+import { badRequest, ok } from "../../../../main/helpers";
+import { ApplicationError } from "../../../../main/errors";
 import { UpdateTaskUsecase } from "../../application";
+import { Request, Response } from "express";
 
+export class UpdateTaskController {
+  constructor( private readonly usecase: UpdateTaskUsecase ) { }
 
-namespace Request {
-  export type Body = {
-    new_description: string;
-  };
-  export type Params = {
-    id: string;
-  };
-}
+  async handle( request: Request, response: Response ): Promise<Response> {
+    const payloadIsInvalid = this.validateUpdateTask(request);
+    if (payloadIsInvalid) return badRequest(response, payloadIsInvalid);
 
-export class UpdateTaskController implements Controller {
-  constructor(private readonly usecase: UpdateTaskUsecase) { }
-
-  async handle(
-    request: Request<Request.Body, Request.Params>
-  ): Promise<Response> {
-    const body = request.body;
-    const { id } = request.params;
-
-    if (!body) return badRequest({ message: "missing body" });
-    if (!id) return badRequest({ message: "id is required" });
-
-    const response = await this.usecase.execute({
-      id,
-      description: body.new_description,
+    const result = await this.usecase.execute({
+      id: request.params.id,
+      description: request.body.description,
     });
-    if (response instanceof EntityNotFoundError)
-      return notFound(response.message);
+    
+    if (result instanceof ApplicationError) return badRequest(response, result);
 
-    return ok(response);
+    return ok(response, result);
   }
+
+  validateUpdateTask = (request: any) => {
+    if (!request.body.description) return new ApplicationError("Missing description");
+
+    if (!request.params.id) return new ApplicationError("id is required");
+  };
 }
