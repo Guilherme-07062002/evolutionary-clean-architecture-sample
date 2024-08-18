@@ -7,20 +7,22 @@ export class UpdateTaskController {
   constructor( private readonly usecase: UpdateTaskUsecase ) { }
 
   async handle( request: Request, response: Response ): Promise<Response> {
-    const body = request.body;
-    const params = request.params;
-
-    if (!body) return badRequest(response, new ApplicationError("missing body") );
-
-    if (!params.id) return badRequest(response, new ApplicationError("id is required"));
+    const payloadIsInvalid = this.validateUpdateTask(request);
+    if (payloadIsInvalid) return badRequest(response, payloadIsInvalid);
 
     const result = await this.usecase.execute({
-      id: params.id,
-      description: body.new_description,
+      id: request.params.id,
+      description: request.body.description,
     });
     
     if (result instanceof ApplicationError) return badRequest(response, result);
 
     return ok(response, result);
   }
+
+  validateUpdateTask = (request: any) => {
+    if (!request.body.description) return new ApplicationError("Missing description");
+
+    if (!request.params.id) return new ApplicationError("id is required");
+  };
 }
