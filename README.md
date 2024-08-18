@@ -46,4 +46,15 @@ yarn
 yarn dev
 ```
 
+4. Acesse a API em:
+
+```bash
+http://localhost:3000
+```
+
+5. E para rodar os testes:
+
+```bash
+yarn test
+```
 

@@ -1,17 +1,16 @@
 
-import { Controller } from "@nestjs/common/interfaces";
 import { ListTasksUseCase } from "../../application";
-import { Response } from "../../domain/ports";
-import { badRequest, ok } from "../adapters";
-import { ApplicationError } from "../../domain/errors";
+import { badRequest, ok } from "../../../../main/helpers";
+import { ApplicationError } from "../../../../main/errors";
+import { Request, Response } from "express";
 
-export class ListTasksController implements Controller {
+export class ListTasksController {
   constructor(private readonly usecase: ListTasksUseCase) { }
 
-  async handle(): Promise<Response> {
-    const res = await this.usecase.execute();
-    if (res instanceof ApplicationError) return badRequest({ message: res.message});
+  async handle(request: Request, response: Response): Promise<Response> {
+    const result = await this.usecase.execute();
+    if (result instanceof ApplicationError) return badRequest(response, result);
     
-    return ok(res);
+    return ok(response, result);
   }
 }
