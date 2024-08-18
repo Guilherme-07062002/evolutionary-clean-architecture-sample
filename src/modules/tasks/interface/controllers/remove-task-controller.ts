@@ -1,26 +1,19 @@
 
-import { badRequest, notFound, ok } from "../adapters";
-import { EntityNotFoundError } from "../../domain/errors";
+import { badRequest, ok } from "../adapters";
+import { ApplicationError } from "../../domain/errors";
 import { RemoveTaskUseCase } from "../../application";
-import { Controller, Request, Response } from "../../domain/ports";
+import { Request, Response } from "express";
 
-namespace Request {
-  export type Params = {
-    id: string;
-  };
-}
-
-export class RemoveTaskController implements Controller {
+export class RemoveTaskController {
   constructor(private readonly usecase: RemoveTaskUseCase) { }
 
-  async handle(request: Request<unknown, Request.Params>): Promise<Response> {
-    const { id } = request.params;
-    if (!id) return badRequest({ message: "id is required" });
+  async handle(request: Request, response: Response): Promise<Response> {
+    const params = request.params;
+    if (!params.id) return badRequest(response, new Error("id is required"));
 
-    const response = await this.usecase.execute(request.params.id);
-    if (response instanceof EntityNotFoundError)
-      return notFound(response.message);
+    const result = await this.usecase.execute(request.params.id);
+    if (result instanceof ApplicationError) return badRequest(response, new Error(result.message));
 
-    return ok(response);
+    return ok(response, result);
   }
 }

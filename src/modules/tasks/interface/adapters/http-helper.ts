@@ -1,43 +1,35 @@
-import { Response } from "../../domain/ports";
+import { Response } from "express";
 
-export function ok(data: unknown): Response {
-  return {
-    status: 200,
-    body: data
-  };
+export function ok<T>(res: Response, data: T): Response {
+  return res.status(200).json({
+    data,
+  });
 }
 
-export function created(data: unknown): Response {
-  return {
-    status: 201,
-    body: data
-  };
+export function created<T>(res: Response, data: T): Response {
+  return res.status(201).json({
+    data,
+  });
 }
 
-export function badRequest(data: unknown): Response {
-  return {
-    status: 400,
-    body: data
-  };
+export function noContent(res: Response): Response {
+  return res.status(204).send();
 }
 
-export function unauthorized(data: unknown): Response {
-  return {
-    status: 401,
-    body: data
-  };
+export function badRequest(res: Response, error: Error): Response {
+  return res.status(400).json({
+    error: error.message,
+  });
 }
 
-export function forbidden(data: unknown): Response {
-  return {
-    status: 403,
-    body: data
-  };
+export function notFound(res: Response, error: Error): Response {
+  return res.status(404).json({
+    error: error.message,
+  });
 }
 
-export function notFound(data: unknown): Response {
-  return {
-    status: 404,
-    body: data
-  };
+export function unauthorized(res: Response, error: Error): Response {
+  return res.status(401).json({
+    error: error.message,
+  });
 }

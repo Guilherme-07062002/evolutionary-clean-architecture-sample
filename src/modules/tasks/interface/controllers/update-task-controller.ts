@@ -1,37 +1,26 @@
-import { Controller, Request, Response } from "../../domain/ports";
-import { badRequest, notFound, ok } from "../adapters";
-import { EntityNotFoundError } from "../../domain/errors";
+import { badRequest, ok } from "../adapters";
+import { ApplicationError } from "../../domain/errors";
 import { UpdateTaskUsecase } from "../../application";
+import { Request, Response } from "express";
 
+export class UpdateTaskController {
+  constructor( private readonly usecase: UpdateTaskUsecase ) { }
 
-namespace Request {
-  export type Body = {
-    new_description: string;
-  };
-  export type Params = {
-    id: string;
-  };
-}
-
-export class UpdateTaskController implements Controller {
-  constructor(private readonly usecase: UpdateTaskUsecase) { }
-
-  async handle(
-    request: Request<Request.Body, Request.Params>
-  ): Promise<Response> {
+  async handle( request: Request, response: Response ): Promise<Response> {
     const body = request.body;
-    const { id } = request.params;
+    const params = request.params;
 
-    if (!body) return badRequest({ message: "missing body" });
-    if (!id) return badRequest({ message: "id is required" });
+    if (!body) return badRequest(response, new Error("missing body") );
 
-    const response = await this.usecase.execute({
-      id,
+    if (!params.id) return badRequest(response, new Error("id is required"));
+
+    const result = await this.usecase.execute({
+      id: params.id,
       description: body.new_description,
     });
-    if (response instanceof EntityNotFoundError)
-      return notFound(response.message);
+    
+    if (result instanceof ApplicationError) return badRequest(response, new Error(result.message));
 
-    return ok(response);
+    return ok(response, result);
   }
 }
